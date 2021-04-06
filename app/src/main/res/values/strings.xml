@@ -11,4 +11,5 @@
     <string name="update_text">Update</string>
     <string name="page_title">Contact</string>
     <string name="delete_text">Delete</string>
+    <string name="app_bar_title">Contacts App</string>
 </resources>
