@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.snackbar.Snackbar;
 
 import br.ucsal.contacts.models.Contact;
-import br.ucsal.contacts.viewmodel.ContactViewModel;
+import br.ucsal.contacts.controller.ContactController;
 
 public class NewContact extends AppCompatActivity {
     public static final String NAME_REPLY = "name_reply";
@@ -28,7 +28,7 @@ public class NewContact extends AppCompatActivity {
     private Button updateButton;
     private Button deleteButton;
 
-    private ContactViewModel contactViewModel;
+    private ContactController contactViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class NewContact extends AppCompatActivity {
 
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(NewContact.this
                 .getApplication())
-                .create(ContactViewModel.class);
+                .create(ContactController.class);
 
         if (getIntent().hasExtra(MainActivity.CONTACT_ID)) {
             contactId = getIntent().getIntExtra(MainActivity.CONTACT_ID, 0);
@@ -107,12 +107,11 @@ public class NewContact extends AppCompatActivity {
             contact.setPhone(phone);
             contact.setAge(Integer.parseInt(age));
             if (isDelete)
-                ContactViewModel.delete(contact);
+                ContactController.delete(contact);
             else
-                ContactViewModel.update(contact);
+                ContactController.update(contact);
             finish();
 
         }
     }
 }
-

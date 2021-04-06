@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,14 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
 import br.ucsal.contacts.models.Contact;
-import br.ucsal.contacts.viewmodel.ContactViewModel;
+import br.ucsal.contacts.controller.ContactController;
 
 public class MainActivity extends AppCompatActivity implements RecycleViewAdapter.OnContactClickListener {
 
     private static final int NEW_CONTACT_ACTIVITY_REQUEST_CODE = 1;
     private static final String TAG = "Clicked";
     public static final String CONTACT_ID = "contact_id";
-    private ContactViewModel contactViewModel;
+    private ContactController contactViewModel;
     private TextView textView;
     private RecyclerView recyclerView;
     private RecycleViewAdapter recyclerViewAdapter;
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
 
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())
-                .create(ContactViewModel.class);
+                .create(ContactController.class);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
             String age = data.getStringExtra(NewContact.AGE);
             assert name != null;
             Contact contact = new Contact(name, phone, Integer.parseInt(age));
-            ContactViewModel.insert(contact);
+            ContactController.insert(contact);
         }
     }
 

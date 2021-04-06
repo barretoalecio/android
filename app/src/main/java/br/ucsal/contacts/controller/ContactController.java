@@ -1,4 +1,4 @@
-package br.ucsal.contacts.viewmodel;
+package br.ucsal.contacts.controller;
 
 import android.app.Application;
 
@@ -11,12 +11,12 @@ import java.util.List;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.service.ContactService;
 
-public class ContactViewModel extends AndroidViewModel {
+public class ContactController extends AndroidViewModel {
 
     public static ContactService service;
     public final LiveData<List<Contact>> contacts;
 
-    public ContactViewModel(@NonNull Application application) {
+    public ContactController(@NonNull Application application) {
         super(application);
         this.service = new ContactService(application);
         contacts = service.read();
