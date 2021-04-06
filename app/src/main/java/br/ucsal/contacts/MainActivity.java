@@ -3,7 +3,6 @@ package br.ucsal.contacts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,18 +28,20 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
     private static final String TAG = "Clicked";
     public static final String CONTACT_ID = "contact_id";
     private ContactController contactViewModel;
-    private TextView textView;
     private RecyclerView recyclerView;
     private RecycleViewAdapter recyclerViewAdapter;
-    private LiveData<List<Contact>> contactList;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sec);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("University of Agriculture Faisalabad");
         recyclerView = findViewById(R.id.recycler_view);
-
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())
                 .create(ContactController.class);
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         contactViewModel.index().observe(this, contacts -> {
             recyclerViewAdapter = new RecycleViewAdapter(contacts, MainActivity.this, this);
             recyclerView.setAdapter(recyclerViewAdapter);
+
         });
 
 
@@ -59,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
             Intent intent = new Intent(MainActivity.this, NewContact.class);
             startActivityForResult(intent, NEW_CONTACT_ACTIVITY_REQUEST_CODE);
         });
-
     }
 
     @Override
