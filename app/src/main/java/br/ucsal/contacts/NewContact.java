@@ -50,7 +50,7 @@ public class NewContact extends AppCompatActivity {
                 if (contact != null) {
                     enterOccupation.setText(contact.getPhone());
                     enterName.setText(contact.getName());
-                    enterAge.setText(contact.getAge());
+                    enterAge.setText(Integer.toString(contact.getAge()));
                 }
             });
             isEdit = true;
