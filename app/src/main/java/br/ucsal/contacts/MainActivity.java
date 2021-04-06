@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
             assert data != null;
             String name = data.getStringExtra(NewContact.NAME_REPLY);
             String phone = data.getStringExtra(NewContact.PHONE);
-            int age = 20; // todo (this age is fake)
+            String age = data.getStringExtra(NewContact.AGE);
             assert name != null;
-            Contact contact = new Contact(name, phone, age);
+            Contact contact = new Contact(name, phone, Integer.parseInt(age));
             ContactViewModel.insert(contact);
         }
     }

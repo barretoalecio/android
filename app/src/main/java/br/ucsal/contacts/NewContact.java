@@ -21,6 +21,7 @@ public class NewContact extends AppCompatActivity {
     public static final String AGE = "age";
     private EditText enterName;
     private EditText enterOccupation;
+    private EditText enterAge;
     private Button saveInfoButton;
     private int contactId = 0;
     private Boolean isEdit = false;
@@ -35,6 +36,7 @@ public class NewContact extends AppCompatActivity {
         setContentView(R.layout.activity_new_contact);
         enterName = findViewById(R.id.enter_name);
         enterOccupation = findViewById(R.id.enter_occupation);
+        enterAge = findViewById(R.id.enter_age);
         saveInfoButton = findViewById(R.id.save_button);
 
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(NewContact.this
@@ -48,6 +50,7 @@ public class NewContact extends AppCompatActivity {
                 if (contact != null) {
                     enterOccupation.setText(contact.getPhone());
                     enterName.setText(contact.getName());
+                    enterAge.setText(contact.getAge());
                 }
             });
             isEdit = true;
@@ -62,13 +65,11 @@ public class NewContact extends AppCompatActivity {
                     && !TextUtils.isEmpty(enterOccupation.getText())) {
                 String name = enterName.getText().toString();
                 String phone = enterOccupation.getText().toString();
-                int age = 20;
+                String age = enterAge.getText().toString();
                 replyIntent.putExtra(NAME_REPLY, name);
                 replyIntent.putExtra(PHONE, phone);
-                replyIntent.putExtra(AGE, 20);
+                replyIntent.putExtra(AGE, age);
                 setResult(RESULT_OK, replyIntent);
-
-
             } else {
                 setResult(RESULT_CANCELED, replyIntent);
             }
@@ -95,7 +96,7 @@ public class NewContact extends AppCompatActivity {
     private void edit(Boolean isDelete) {
         String name = enterName.getText().toString().trim();
         String phone = enterOccupation.getText().toString().trim();
-
+        String age = enterAge.getText().toString().trim();
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)) {
             Snackbar.make(enterName, R.string.empty, Snackbar.LENGTH_SHORT)
                     .show();
@@ -104,6 +105,7 @@ public class NewContact extends AppCompatActivity {
             contact.setId(contactId);
             contact.setName(name);
             contact.setPhone(phone);
+            contact.setAge(Integer.parseInt(age));
             if (isDelete)
                 ContactViewModel.delete(contact);
             else
