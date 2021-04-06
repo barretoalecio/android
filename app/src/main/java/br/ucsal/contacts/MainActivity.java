@@ -47,13 +47,9 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        contactViewModel.getAllContacts().observe(this, contacts -> {
-
-
+        contactViewModel.index().observe(this, contacts -> {
             recyclerViewAdapter = new RecycleViewAdapter(contacts, MainActivity.this, this);
             recyclerView.setAdapter(recyclerViewAdapter);
-
-
         });
 
 
@@ -76,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
             String age = data.getStringExtra(NewContact.AGE);
             assert name != null;
             Contact contact = new Contact(name, phone, Integer.parseInt(age));
-            ContactController.insert(contact);
+            ContactController.store(contact);
         }
     }
 

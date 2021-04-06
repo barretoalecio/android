@@ -22,9 +22,9 @@ public class ContactController extends AndroidViewModel {
         contacts = service.read();
     }
 
-    public LiveData<List<Contact>> getAllContacts() { return contacts; }
-    public static void insert(Contact contact) { service.create(contact); }
-    public LiveData<Contact> get(int id) { return service.read(id);}
+    public LiveData<List<Contact>> index() { return contacts; }
+    public static void store(Contact contact) { service.create(contact); }
+    public LiveData<Contact> show(int id) { return service.read(id);}
     public static void update(Contact contact) { service.update(contact);}
-    public static void delete(Contact contact) { service.delete(contact);}
+    public static void destroy(Contact contact) { service.delete(contact);}
 }

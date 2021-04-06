@@ -46,7 +46,7 @@ public class NewContact extends AppCompatActivity {
         if (getIntent().hasExtra(MainActivity.CONTACT_ID)) {
             contactId = getIntent().getIntExtra(MainActivity.CONTACT_ID, 0);
 
-            contactViewModel.get(contactId).observe(this, contact -> {
+            contactViewModel.show(contactId).observe(this, contact -> {
                 if (contact != null) {
                     enterOccupation.setText(contact.getPhone());
                     enterName.setText(contact.getName());
@@ -107,7 +107,7 @@ public class NewContact extends AppCompatActivity {
             contact.setPhone(phone);
             contact.setAge(Integer.parseInt(age));
             if (isDelete)
-                ContactController.delete(contact);
+                ContactController.destroy(contact);
             else
                 ContactController.update(contact);
             finish();
