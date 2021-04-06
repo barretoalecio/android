@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         recyclerView = findViewById(R.id.recycler_view);
 
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
