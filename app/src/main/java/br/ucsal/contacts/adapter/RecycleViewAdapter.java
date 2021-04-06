@@ -40,7 +40,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         Contact contact = contactList.get(position);
         holder.name.setText(contact.getName());
         holder.phone.setText(contact.getPhone());
-        holder.age.setText(contact.getAge());
+        holder.age.setText(Integer.toString(contact.getAge()) + " Anos");
     }
 
     @Override
