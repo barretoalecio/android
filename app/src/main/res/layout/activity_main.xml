@@ -27,6 +27,7 @@
         android:layout_marginBottom="28dp"
         android:clickable="true"
         android:contentDescription="@string/description_text"
+        app:backgroundTint="#386726"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
