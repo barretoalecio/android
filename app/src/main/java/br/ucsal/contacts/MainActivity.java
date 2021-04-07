@@ -3,6 +3,8 @@ package br.ucsal.contacts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -27,6 +29,7 @@ import androidx.viewpager.widget.ViewPager;
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
 import br.ucsal.contacts.adapter.ViewPageAdapter;
 import br.ucsal.contacts.fragments.FragmentListSortedById;
+import br.ucsal.contacts.fragments.SettingsFragment;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
 
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
     private RecycleViewAdapter recyclerViewAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private FragmentListSortedById fragmentListSortedById;
+    private Button banner_button;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,40 +52,26 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_bar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sec);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("University of Agriculture Faisalabad");
+        banner_button = findViewById(R.id.banner_button);
         // todo colocar a lista nos TABs
         // recyclerView = findViewById(R.id.recycler_view);
 
-        fragmentListSortedById = new FragmentListSortedById();
         tabLayout.setupWithViewPager(this.viewPager);
         ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager(), 0);
         viewPager.setAdapter(viewPagerAdapter);
-        viewPagerAdapter.addFragment(fragmentListSortedById);
+        //viewPagerAdapter.addFragment(fragmentListSortedById, "ListSortedById");
+        //viewPagerAdapter.addFragment(settingsFragment, "Settings");
 
-        contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
-                .getApplication())
-                .create(ContactController.class);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        contactViewModel.index().observe(this, contacts -> {
-            recyclerViewAdapter = new RecycleViewAdapter(contacts, MainActivity.this, this);
-            recyclerView.setAdapter(recyclerViewAdapter);
-
+        banner_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NewContact.class);
+                startActivityForResult(intent, NEW_CONTACT_ACTIVITY_REQUEST_CODE);
+            }
         });
 
-
-
-        FloatingActionButton fab = findViewById(R.id.add_contact_fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, NewContact.class);
-            startActivityForResult(intent, NEW_CONTACT_ACTIVITY_REQUEST_CODE);
-        });
     }
 
     @Override
