@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         Fragment contactsSortedByIdFragment = new ContactsSortedByIdFragment();
 
         viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Id");
+        viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Name");
+        viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Phone");
         //viewPagerAdapter.addFragment(settingsFragment, "Settings");
-
 
 
         banner_button.setOnClickListener(new View.OnClickListener() {
