@@ -53,4 +53,4 @@ public class ContactsSortedByIdFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_contacts_sorted_by_id, container, false);
     }
-}s
+}
