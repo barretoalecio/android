@@ -31,7 +31,7 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="@dimen/general_padding"
                 android:text="TextView"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/purple_500"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
