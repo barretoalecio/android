@@ -17,6 +17,7 @@ import br.ucsal.contacts.adapter.ViewPageAdapter;
 import br.ucsal.contacts.fragments.ContactsSortedByIdFragment;
 import br.ucsal.contacts.fragments.ContactsSortedByNameFragment;
 import br.ucsal.contacts.fragments.ContactsSortedByPhoneFragment;
+import br.ucsal.contacts.fragments.ContatsDefaultFragment;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         tabLayout.setupWithViewPager(this.viewPager);
         ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager(), 0);
         viewPager.setAdapter(viewPagerAdapter);
-        Fragment contactsSortedByIdFragment = new ContactsSortedByIdFragment();
+        Fragment contactsSortedByIdFragment = new ContatsDefaultFragment();
         Fragment contactsSortedByNameFragment = new ContactsSortedByNameFragment();
         Fragment contactsSortedByPhoneFragment = new ContactsSortedByPhoneFragment();
         viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Id");
