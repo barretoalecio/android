@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -13,12 +15,18 @@ import java.util.Objects;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
+import br.ucsal.contacts.adapter.ViewPageAdapter;
+import br.ucsal.contacts.fragments.FragmentListSortedById;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
 
@@ -30,18 +38,31 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
     private ContactController contactViewModel;
     private RecyclerView recyclerView;
     private RecycleViewAdapter recyclerViewAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private FragmentListSortedById fragmentListSortedById;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sec);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("University of Agriculture Faisalabad");
-        recyclerView = findViewById(R.id.recycler_view);
+        // todo colocar a lista nos TABs
+        // recyclerView = findViewById(R.id.recycler_view);
+
+        fragmentListSortedById = new FragmentListSortedById();
+        tabLayout.setupWithViewPager(this.viewPager);
+        ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager(), 0);
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPagerAdapter.addFragment(fragmentListSortedById);
+
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())
                 .create(ContactController.class);
@@ -86,4 +107,6 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         intent.putExtra(CONTACT_ID, contact.getId());
         startActivity(intent);
     }
+
+
 }
