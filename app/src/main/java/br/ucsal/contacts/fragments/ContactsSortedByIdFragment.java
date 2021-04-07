@@ -25,13 +25,14 @@ public class ContactsSortedByIdFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.recyclerView = getView().findViewById(R.id.recycler_view);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_contacts_sorted_by_id, container , false);
+        this.recyclerView = view.findViewById(R.id.recycler_view);
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity()
                 .getApplication())
                 .create(ContactController.class);
@@ -52,4 +53,4 @@ public class ContactsSortedByIdFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_contacts_sorted_by_id, container, false);
     }
-}
+}s
