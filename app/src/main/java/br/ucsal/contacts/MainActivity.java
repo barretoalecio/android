@@ -9,10 +9,12 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
 import br.ucsal.contacts.adapter.ViewPageAdapter;
+import br.ucsal.contacts.fragments.ContactsSortedByIdFragment;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
 
@@ -42,7 +44,9 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         tabLayout.setupWithViewPager(this.viewPager);
         ViewPageAdapter viewPagerAdapter = new ViewPageAdapter(getSupportFragmentManager(), 0);
         viewPager.setAdapter(viewPagerAdapter);
-        //viewPagerAdapter.addFragment(fragmentListSortedById, "ListSortedById");
+        Fragment contactsSortedByIdFragment = new ContactsSortedByIdFragment();
+
+        viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Id");
         //viewPagerAdapter.addFragment(settingsFragment, "Settings");
 
 

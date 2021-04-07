@@ -28,7 +28,7 @@ public class NewContact extends AppCompatActivity {
     private Button updateButton;
     private Button deleteButton;
 
-    private ContactController contactViewModel;
+    private ContactController contactController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +39,13 @@ public class NewContact extends AppCompatActivity {
         enterAge = findViewById(R.id.enter_age);
         saveInfoButton = findViewById(R.id.save_button);
 
-        contactViewModel = new ViewModelProvider.AndroidViewModelFactory(NewContact.this
+        contactController = new ViewModelProvider.AndroidViewModelFactory(NewContact.this
                 .getApplication())
                 .create(ContactController.class);
 
         if (getIntent().hasExtra(MainActivity.CONTACT_ID)) {
             contactId = getIntent().getIntExtra(MainActivity.CONTACT_ID, 0);
-
-            contactViewModel.show(contactId).observe(this, contact -> {
+            contactController.show(contactId).observe(this, contact -> {
                 if (contact != null) {
                     enterOccupation.setText(contact.getPhone());
                     enterName.setText(contact.getName());
@@ -56,8 +55,6 @@ public class NewContact extends AppCompatActivity {
             isEdit = true;
 
         }
-
-
         saveInfoButton.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
 
