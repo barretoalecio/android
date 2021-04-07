@@ -5,31 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 import java.util.Objects;
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
 import br.ucsal.contacts.adapter.ViewPageAdapter;
-import br.ucsal.contacts.fragments.FragmentListSortedById;
-import br.ucsal.contacts.fragments.SettingsFragment;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
 
