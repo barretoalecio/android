@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import br.ucsal.contacts.fragments.dummy.DummyContent;
 public class ContatsDefaultFragment extends Fragment {
 
     private RecycleViewAdapter recyclerViewAdapter;
+    private RecyclerView recyclerView;
     private ContactController contactViewModel;
     private View view;
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -49,17 +51,26 @@ public class ContatsDefaultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contats_default_list, container, false);
+        contactViewModel = new ViewModelProvider
+                .AndroidViewModelFactory(getActivity()
+                .getApplication())
+                .create(ContactController.class);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            contactViewModel.index().observe(getViewLifecycleOwner(), contacts -> {
+                recyclerViewAdapter = new RecycleViewAdapter(contacts, getContext(), new RecycleViewAdapter.OnContactClickListener() {
+                    @Override
+                    public void onContactClick(int position) {
+
+                    }
+                });
+                recyclerView.setAdapter(recyclerViewAdapter);
+            });
         }
         return view;
     }
