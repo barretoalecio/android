@@ -48,7 +48,6 @@ public class ContactsSortedByIdFragment extends Fragment {
                 }
             });
             recyclerView.setAdapter(recyclerViewAdapter);
-
         });
 
         return inflater.inflate(R.layout.fragment_contacts_sorted_by_id, container, false);
