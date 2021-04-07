@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import br.ucsal.contacts.R;
 import br.ucsal.contacts.fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
