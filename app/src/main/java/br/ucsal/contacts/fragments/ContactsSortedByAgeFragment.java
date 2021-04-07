@@ -19,18 +19,16 @@ import br.ucsal.contacts.controller.ContactController;
 import br.ucsal.contacts.fragments.dummy.DummyContent;
 import br.ucsal.contacts.models.SortTypeEnum;
 
-public class ContatsDefaultFragment extends Fragment {
+public class ContactsSortedByAgeFragment extends Fragment {
 
+    private static final String ARG_COLUMN_COUNT = "column-count";
     private RecycleViewAdapter recyclerViewAdapter;
     private ContactController contactViewModel;
-    private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
-    public ContatsDefaultFragment() {
-    }
-
-    public static ContatsDefaultFragment newInstance(int columnCount) {
-        ContatsDefaultFragment fragment = new ContatsDefaultFragment();
+    @SuppressWarnings("unused")
+    public static ContactsSortedByAgeFragment newInstance(int columnCount) {
+        ContactsSortedByAgeFragment fragment = new ContactsSortedByAgeFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -49,7 +47,7 @@ public class ContatsDefaultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contats_default_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_contacts_sorted_by_age_list, container, false);
         contactViewModel = new ViewModelProvider
                 .AndroidViewModelFactory(getActivity()
                 .getApplication())
@@ -61,7 +59,7 @@ public class ContatsDefaultFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            contactViewModel.index(SortTypeEnum.DEFAULT).observe(getViewLifecycleOwner(), contacts -> {
+            contactViewModel.index(SortTypeEnum.AGE).observe(getViewLifecycleOwner(), contacts -> {
                 recyclerViewAdapter = new RecycleViewAdapter(contacts, getContext(), new RecycleViewAdapter.OnContactClickListener() {
                     @Override
                     public void onContactClick(int position) {

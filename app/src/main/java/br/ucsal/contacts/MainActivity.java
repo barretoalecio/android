@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import br.ucsal.contacts.adapter.RecycleViewAdapter;
 import br.ucsal.contacts.adapter.ViewPageAdapter;
-import br.ucsal.contacts.fragments.ContactsSortedByIdFragment;
+import br.ucsal.contacts.fragments.ContactsSortedByAgeFragment;
 import br.ucsal.contacts.fragments.ContactsSortedByNameFragment;
-import br.ucsal.contacts.fragments.ContactsSortedByPhoneFragment;
 import br.ucsal.contacts.fragments.ContatsDefaultFragment;
 import br.ucsal.contacts.models.Contact;
 import br.ucsal.contacts.controller.ContactController;
@@ -49,12 +48,11 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
         viewPager.setAdapter(viewPagerAdapter);
         Fragment contactsSortedByIdFragment = new ContatsDefaultFragment();
         Fragment contactsSortedByNameFragment = new ContactsSortedByNameFragment();
-        Fragment contactsSortedByPhoneFragment = new ContactsSortedByPhoneFragment();
+        Fragment contactsSortedByPhoneFragment = new ContactsSortedByAgeFragment();
         viewPagerAdapter.addFragment(contactsSortedByIdFragment, "Order By Id");
         viewPagerAdapter.addFragment(contactsSortedByNameFragment, "Order By Name");
-        viewPagerAdapter.addFragment(contactsSortedByPhoneFragment, "Order By Phone");
+        viewPagerAdapter.addFragment(contactsSortedByPhoneFragment, "Order By Age");
         //viewPagerAdapter.addFragment(settingsFragment, "Settings");
-
 
         banner_button.setOnClickListener(new View.OnClickListener() {
             @Override
